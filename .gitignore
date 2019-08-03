@@ -2,3 +2,5 @@ secrets.tar
 google_compute_engine
 google_compute_engine.pub
 credentials.json
+__pycache__
+venv

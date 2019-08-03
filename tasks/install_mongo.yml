@@ -1,0 +1,27 @@
+---
+- name: Add key
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: EA312927
+    state: present
+  tags:
+  - mongo_install
+
+- name: Install repo
+  apt_repository:
+    repo: deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse
+    state: present
+    filename: mongodb-org-3.2.list
+  tags:
+  - mongo_install
+
+- name: Install MongoDB
+  apt:
+    name: mongodb-org
+    state: present
+    update_cache: yes
+    allow_unauthenticated: yes
+  notify:
+  - restart_mongod
+  tags:
+  - mongo_install

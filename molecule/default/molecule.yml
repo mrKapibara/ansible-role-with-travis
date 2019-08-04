@@ -6,12 +6,14 @@ driver:
 lint:
   name: yamllint
 platforms:
-  - name: instance
+  - name: instance-molecule
     zone: europe-west1-b
     machine_type: f1-micro
-    image-family: ubuntu-1604-lts
+    image: ubuntu-1604-xenial-v20190628
+    tags: molecule-ssh
 provisioner:
   name: ansible
+  log: true
   lint:
     name: ansible-lint
 verifier:

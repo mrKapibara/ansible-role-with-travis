@@ -7,7 +7,8 @@
   vars:
     ssh_port: 22
     ssh_user: "{{ lookup('env', 'USER') }}"
-    ssh_identity_file: "{{ lookup('env', 'HOME') }}/.ssh/google_compute_engine"
+    # ssh_identity_file: "{{ lookup('env', 'HOME') }}/.ssh/google_compute_engine"
+    ssh_identity_file: "{{ lookup('env', 'PWD') }}/google_compute_engine"
   tasks:
     - name: Create molecule instance(s)
       gce:
@@ -18,6 +19,7 @@
         service_account_email: "{{ lookup('env', 'GCE_SERVICE_ACCOUNT_EMAIL') }}"
         credentials_file: "{{ lookup('env', 'GCE_CREDENTIALS_FILE') }}"
         project_id: "{{ lookup('env', 'GCE_PROJECT_ID') }}"
+        tags: "{{ item.tags }}"
       register: server
       with_items: "{{ molecule_yml.platforms }}"
       async: 7200

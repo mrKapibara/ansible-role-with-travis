@@ -2,7 +2,7 @@ language: python
 python:
 - '3.6'
 install:
-- pip install 'ansible>=2.5' molecule apache-libcloud paramiko
+- pip install 'molecule[gce]' paramiko
 env:
   matrix:
   - GCE_CREDENTIALS_FILE="$(pwd)/credentials.json"
@@ -14,8 +14,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_dab79c4f5f0a_key -iv $encrypted_dab79c4f5f0a_iv
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
-- mv google_compute_engine /home/travis/.ssh/
-- chmod 0600 /home/travis/.ssh/google_compute_engine
+- chmod 0600 google_compute_engine
 script:
 - molecule create
 - molecule converge

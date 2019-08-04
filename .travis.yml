@@ -2,7 +2,7 @@ language: python
 python:
 - '3.6'
 install:
-- pip install 'ansible>=2.5' molecule apache-libcloud
+- pip install 'ansible>=2.5' molecule apache-libcloud paramiko
 env:
   matrix:
   - GCE_CREDENTIALS_FILE="$(pwd)/credentials.json"
